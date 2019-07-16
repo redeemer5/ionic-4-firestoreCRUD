@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 export class HomePage implements OnInit {
 
 public songList;
-firestoreProvider: any;
 constructor(
   private firestoreService: FirestoreService,
   private router: Router,
@@ -22,7 +21,7 @@ constructor(
 
 ngOnInit()
 {
-  this.songList = this.firestoreProvider.getSongList().valueChanges();
+  this.songList = this.firestoreService.getSongList().valueChanges();
 }
 
 
