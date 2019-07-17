@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { FirestoreService } from '../../services/data/firestore.service';
+import { NavController } from '@ionic/angular';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class AddPage implements OnInit {
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     public firestoreService: FirestoreService,
+    public navCtrl: NavController,
     formBuilder: FormBuilder
   ) {
     this.createSongForm = formBuilder.group({
@@ -26,19 +28,6 @@ export class AddPage implements OnInit {
       songName: ['', Validators.required],
     });
   }
-
-
-  // async createSong() {
-  //   const loading = await this.loadingCtrl.create();
-  
-  //   const albumName = this.createSongForm.value.albumName;
-  //   const artistName = this.createSongForm.value.artistName;
-  //   const songDescription = this.createSongForm.value.songDescription;
-  //   const songName = this.createSongForm.value.songName;
-  
-  //   return await loading.present();
-  // }
-
 
   async createSong() {
     const loading = await this.loadingCtrl.create();
@@ -53,7 +42,7 @@ export class AddPage implements OnInit {
       .then(
         () => {
           loading.dismiss().then(() => {
-            this.router.navigateByUrl('');
+            this.navCtrl.navigateForward("/home");
           });
         },
         error => {
