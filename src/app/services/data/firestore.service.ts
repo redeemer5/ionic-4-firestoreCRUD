@@ -34,4 +34,8 @@ export class FirestoreService {
   getSongDetail(songId: string): AngularFirestoreDocument<Song> {
     return this.firestore.collection('songList').doc(songId);
   }
+
+  deleteSong(songId: string): Promise<void> {
+    return this.firestore.doc(`songList/${songId}`).delete();
+  }
 }
